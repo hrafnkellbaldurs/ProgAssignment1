@@ -5,6 +5,8 @@ __author__ = 'Hrafnkell'
 
 
 class Lexer(object):
+    ''' Diagnoses each token and describes it for the computer '''
+
     def nextToken(self, word):
             return self.get_tokencode(word)
 
@@ -44,11 +46,9 @@ class Lexer(object):
                 return False
         return ans
 
-lex = Lexer()
-
-while True:
-    stdin = input()
-    for i in stdin.split():
-        print(lex.nextToken(i).tCode)
+#while True:
+#    stdin = input()
+#    for i in stdin.split():
+#        print(lex.nextToken(i).tCode)
 
 
