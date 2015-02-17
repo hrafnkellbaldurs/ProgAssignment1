@@ -5,9 +5,6 @@ __author__ = 'Hrafnkell'
 
 
 class Lexer(object):
-    def __init__(self):
-        pass
-
     def nextToken(self, word):
             return self.get_tokencode(word)
 
@@ -52,6 +49,6 @@ lex = Lexer()
 while True:
     stdin = input()
     for i in stdin.split():
-        print(lex.nextToken(i).lexeme)
+        print(lex.nextToken(i).tCode)
 
 
