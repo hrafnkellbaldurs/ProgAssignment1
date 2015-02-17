@@ -21,6 +21,8 @@ class Parser(object):
             stdin = input()
             for i in stdin.split():
                 self.token = self.lexer.nextToken(i)
+                #if self.statements(self.token):
+
 
     ''' Statements -> Statement ; Statements | end '''
     def statements(self):
