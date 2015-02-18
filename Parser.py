@@ -101,6 +101,8 @@ class Parser(object):
         print(self.nextToken.lexeme)
         sys.exit(1)
 
+#token = Token("+", "PLUS")
+
 
 
 
