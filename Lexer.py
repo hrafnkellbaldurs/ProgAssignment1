@@ -90,10 +90,3 @@ while lex.i != len(lex.stdin):
 
 
 #print(string)
-
-
-
-
-
-
-
