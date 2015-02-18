@@ -76,20 +76,20 @@ class Parser(object):
     ''' Factor -> int | id | (Expr) '''
     def factor(self):
         # if token is INT
-        if self.nextToken == 4:
+        if self.nextToken == "INT":
             self.nextToken = self.lexer.nextToken()
 
         # if token is ID
-        elif self.nextToken == 1:
+        elif self.nextToken == "ID":
             self.nextToken == self.lexer.nextToken()
 
         # LPAREN
-        elif self.nextToken == 8:
+        elif self.nextToken == "LPAREN":
             self.nextToken == self.lexer.nextToken()
             self.expr()
 
             # RPAREN
-            if self.nextToken == 9:
+            if self.nextToken == "RPAREN":
                 self.nextToken == self.lexer.nextToken()
             else:
                 self.error()

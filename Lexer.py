@@ -51,14 +51,26 @@ class Lexer(object):
                     tmpLex += self.stdin[iter]
                     iter += 1
                 else:
-                    if self.stdin[iter].isalpha() or self.stdin[iter] == "=":
-                        self.i = iter - 1
-                        return Token("Syntax error!", "error")
                     self.i = iter - 1
                     break
+                #else:
+                #    if self.stdin[iter].isalpha() or self.stdin[iter] == "=":
+                #        self.i = iter - 1
+                #        return Token("Syntax error!", "error")
+                #    self.i = iter - 1
+                #    break
             return Token(tmpLex, "int")
         elif lexeme.isalpha():
-            return Token(lexeme, "id")
+            tmpLex = lexeme
+            iter = self.i + 1
+            while True:
+                if self.stdin[iter].isalpha():
+                    tmpLex += self.stdin[iter]
+                    iter += 1
+                else:
+                    self.i = iter - 1
+                    break
+            return Token(tmpLex, "id")
         else:
             return Token("Syntax error!", "error")
 
@@ -71,7 +83,13 @@ class Lexer(object):
             return False
 
     def is_print(self, lexeme):
-        pass
+        iter = self.i
+        if self.stdin[iter + 1] == "r" and self.stdin[iter + 2] == "i" and self.stdin[iter + 3] == "n" and self.stdin[iter + 4] == "t" :
+            self.i += 4
+            return True
+        else:
+            return False
+
 
 
 #while True:
