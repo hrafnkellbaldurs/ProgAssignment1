@@ -72,7 +72,7 @@ class Lexer(object):
                     break
             return Token(tmpLex, "id")
         else:
-            return Token("Syntax error!", "error")
+            return Token("error", "error")
 
     def is_end(self, lexeme):
         iter = self.i
@@ -98,13 +98,13 @@ class Lexer(object):
 #        print(lex.nextToken(i).tCode)
 
 
-lex = Lexer()
+#lex = Lexer()
 
 #string = ""
 
-while lex.i != len(lex.stdin):
-    tok = lex.nextToken()
-    print(tok.tCode + " " + tok.lexeme)
+#while lex.i != len(lex.stdin):
+#    tok = lex.nextToken()
+#    print(tok.tCode + " " + tok.lexeme)
 
 
 #print(string)
