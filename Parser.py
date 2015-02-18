@@ -1,5 +1,6 @@
 from Lexer import Lexer
 from Token import Token
+import sys
 
 __author__ = 'Hrafnkell'
 
@@ -12,37 +13,95 @@ class Parser(object):
     ''' Constructor '''
     def __init__(self, lexer):
         self.lexer = lexer
-        self.token = Token()
+        self.nextToken = Token()
 
     ''' Goes through input and diagnoses syntax '''
     def parse(self):
-        output = []
-        while True:
-            stdin = input()
-            for i in stdin.split():
-                self.token = self.lexer.nextToken(i)
-                #if self.statements(self.token):
-
+        self.nextToken = self.lexer.nextToken()
+        self.statements()
 
     ''' Statements -> Statement ; Statements | end '''
     def statements(self):
-        pass
+        if self.nextToken == "END":
+            self.nextToken == self.lexer.nextToken()
+            sys.exit(1)
+        else:
+            self.statement()
+            if self.nextToken == "SEMICOL":
+                self.nextToken == self.lexer.nextToken()
+                self.statements()
 
     ''' Statement -> id = Expr | print id '''
     def statement(self):
-        pass
+        if self.nextToken == "ID":
+            self.nextToken == self.lexer.nextToken()
+            if self.nextToken == "ASSIGN":
+                self.nextToken == self.lexer.nextToken()
+                self.expr()
+            else:
+                self.error()
+        elif self.nextToken == "PRINT":
+            self.nextToken == self.lexer.nextToken()
+            if self.nextToken == "ID":
+                self.nextToken == self.lexer.nextToken()
+                #Skrifa ut assembly
+            else:
+                self.error()
+        else:
+            self.error()
+
 
     ''' Expr -> Term | Term + Expr | Term - Expr '''
     def expr(self):
-        pass
+        self.term()
+        if self.nextToken == "PLUS":
+            self.nextToken == self.lexer.nextToken()
+            self.expr()
+        elif self.nextToken == "MINUS":
+            self.nextToken == self.lexer.nextToken()
+            self.expr()
+        else:
+            self.error()
 
     ''' Term -> Factor | Factor * Term '''
     def term(self):
-        pass
+        self.factor()
+        if self.nextToken == "MULT":
+            self.nextToken == self.lexer.nextToken()
+            self.term()
+        else:
+            self.error()
+
 
     ''' Factor -> int | id | (Expr) '''
     def factor(self):
-        pass
+        # if token is INT
+        if self.nextToken == 4:
+            self.nextToken = self.lexer.nextToken()
+
+        # if token is ID
+        elif self.nextToken == 1:
+            self.nextToken == self.lexer.nextToken()
+
+        # LPAREN
+        elif self.nextToken == 8:
+            self.nextToken == self.lexer.nextToken()
+            self.expr()
+
+            # RPAREN
+            if self.nextToken == 9:
+                self.nextToken == self.lexer.nextToken()
+            else:
+                self.error()
+        else:
+            self.error()
+
+
+    def error(self):
+        print(self.nextToken.lexeme)
+        sys.exit(1)
+
+
 
 
 

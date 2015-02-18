@@ -6,35 +6,37 @@ __author__ = 'Hrafnkell'
 
 class Lexer(object):
     ''' Diagnoses each token and describes it for the computer '''
+    def __init__(self):
+        self.stdin = input()
 
-    def nextToken(self, word):
-            return self.get_tokencode(word)
+    def nextToken(self):
+            return self.get_tokencode(self.stdin)
 
     def get_tokencode(self, lexeme):
         if lexeme == "+":
-            return Token("+", "PLUS")
+            return Token("+", "+")
         elif lexeme == "-":
-            return Token("-", "MINUS")
+            return Token("-", "-")
         elif lexeme == "*":
-            return Token("*", "MULT")
+            return Token("*", "*")
         elif lexeme == "(":
-            return Token("(", "LPAREN")
+            return Token("(", "(")
         elif lexeme == ")":
-            return Token(")", "RPAREN")
+            return Token(")", ")")
         elif lexeme == "=":
-            return Token("=", "ASSIGN")
+            return Token("=", "=")
         elif lexeme == ";":
-            return Token(";", "SEMICOL")
+            return Token(";", ";")
         elif lexeme == "end":
-            return Token("end", "END")
+            return Token("end", "end")
         elif lexeme == "print":
-            return Token("print", "PRINT")
+            return Token("print", "print")
         elif lexeme.isdigit():
-            return Token(lexeme, "INT")
+            return Token(lexeme, "int")
         elif self.is_ID(lexeme):
-            return Token(lexeme, "ID")
+            return Token(lexeme, "id")
         else:
-            return Token("Syntax error!: %s" % (lexeme), "ERROR")
+            return Token("Syntax error!", "error")
 
     def is_ID(self, token):
         ''' returns true if token is an ID (A-Z, a-z)+ '''
