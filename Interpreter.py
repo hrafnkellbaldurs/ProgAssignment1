@@ -36,6 +36,8 @@ class Interpreter(object):
 
     def decode(self):
         # variables for easy calling
+        if self.input_line == []:
+            return
         command = self.input_line[0]
         if command == "PUSH":
             operator = self.input_line[1]
@@ -73,7 +75,7 @@ class Interpreter(object):
             if not stack.is_empty():
                print(stack.pop())
         else:
-            print("Error of operator: %s" % (command))
+            print("Error of operator: %s" % (operator))
             sys.exit(1)
 
 
