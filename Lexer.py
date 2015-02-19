@@ -12,8 +12,9 @@ class Lexer(object):
         while True:
             io = input()
             self.stdin += io
-            if "end" in io:
+            if ("end" in io):
                 break
+
         self.stdin = self.stdin.replace(" ", "")
         self.stdin = self.stdin.replace("\n", "")
         self.stdin = self.stdin.replace("\t", "")
@@ -53,12 +54,6 @@ class Lexer(object):
                 else:
                     self.i = iter - 1
                     break
-                #else:
-                #    if self.stdin[iter].isalpha() or self.stdin[iter] == "=":
-                #        self.i = iter - 1
-                #        return Token("Syntax error!", "error")
-                #    self.i = iter - 1
-                #    break
             return Token(tmpLex, "int")
         elif lexeme.isalpha():
             tmpLex = lexeme
