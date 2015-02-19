@@ -1,6 +1,7 @@
 from Token import Token
 import string
-import sys
+from sys import stdin
+
 
 __author__ = 'Hrafnkell'
 
@@ -8,20 +9,23 @@ __author__ = 'Hrafnkell'
 class Lexer(object):
     ''' Diagnoses each token and describes it for the computer '''
     def __init__(self):
-        self.stdin = ""
-        while True:
-            io = input()
-            self.stdin += io
-            if ("end" in io):
-                break
+        ##self.input = stdin
+        self.string = ""
+        self.string = stdin.read()
 
-        self.stdin = self.stdin.replace(" ", "")
-        self.stdin = self.stdin.replace("\n", "")
-        self.stdin = self.stdin.replace("\t", "")
+        #while True:
+        #    io = input()
+        #    self.stdin += io
+        #    if ("end" in io):
+        #        break
+
+        self.string = self.string.replace(" ", "")
+        self.string = self.string.replace("\n", "")
+        self.string = self.string.replace("\t", "")
         self.i = 0
 
     def nextToken(self):
-        token = self.get_tokencode(self.stdin[self.i])
+        token = self.get_tokencode(self.string[self.i])
         self.i += 1
         return token
 
@@ -86,6 +90,10 @@ class Lexer(object):
             return False
 
 
+#print("running")
+
+#string = stdin.read()
+#print(string)
 
 #while True:
 #    stdin = input()
