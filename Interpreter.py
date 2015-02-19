@@ -76,7 +76,7 @@ class Interpreter(object):
                print(stack.pop())
                sys.exit(1)
         else:
-            print("Error of operator: %s" % (operator))
+            print("Error of operator: %s" % (command))
             sys.exit(1)
 
 
