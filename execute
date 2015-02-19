@@ -1,0 +1,11 @@
+#Authors:
+#       Name: Hrafnkell Baldursson
+#       RU username: hrafnkell13
+#
+#       Name: Sigurdur Mar Atlason
+#       RU username: sigurdura13
+
+#!/bin/bash
+clear
+python Compiler.py < $1 | python Interpreter.py
+
