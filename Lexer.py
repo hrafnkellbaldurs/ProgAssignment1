@@ -9,27 +9,26 @@ __author__ = 'Hrafnkell'
 class Lexer(object):
     ''' Diagnoses each token and describes it for the computer '''
     def __init__(self):
-        ##self.input = stdin
-        self.string = ""
-        self.string = stdin.read()
-
-        #while True:
-        #    io = input()
-        #    self.stdin += io
-        #    if ("end" in io):
-        #        break
-
-        self.string = self.string.replace(" ", "")
-        self.string = self.string.replace("\n", "")
-        self.string = self.string.replace("\t", "")
-        self.i = 0
+        self.c = ""
+        #self.string = ""
+        #self.string = stdin.read()
+        #self.string = self.string.replace(" ", "")
+        #self.string = self.string.replace("\n", "")
+        #self.string = self.string.replace("\t", "")
+        #self.i = 0
 
     def nextToken(self):
-        token = self.get_tokencode(self.string[self.i])
-        self.i += 1
+        token = ""
+        if(self.c == ""):
+            token = self.get_tokencode(self.next_char())
+        else:
+            token = self.get_tokencode(self.c)
+            self.c = ""
         return token
 
     def get_tokencode(self, lexeme):
+        while lexeme == " " or lexeme == "\n" or lexeme == "\t":
+            lexeme = self.next_char()
         if lexeme == "+":
             return Token("+", "+")
         elif lexeme == "-":
@@ -44,50 +43,50 @@ class Lexer(object):
             return Token("=", "=")
         elif lexeme == ";":
             return Token(";", ";")
-        elif lexeme == "e" and self.is_end(lexeme):
-            return Token("end", "end")
-        elif lexeme == "p" and self.is_print(lexeme):
-            return Token("print", "print")
         elif lexeme.isdigit():
             tmpLex = lexeme
-            iter = self.i + 1
             while True:
-                if self.stdin[iter].isdigit():
-                    tmpLex += self.stdin[iter]
-                    iter += 1
+                nxt_char = self.next_char()
+                if nxt_char.isdigit():
+                    tmpLex += nxt_char
                 else:
-                    self.i = iter - 1
+                    self.c = nxt_char
                     break
             return Token(tmpLex, "int")
         elif lexeme.isalpha():
             tmpLex = lexeme
-            iter = self.i + 1
             while True:
-                if self.stdin[iter].isalpha():
-                    tmpLex += self.stdin[iter]
-                    iter += 1
+                nxt_char = self.next_char()
+                if nxt_char.isalpha():
+                    tmpLex += nxt_char
+                    if tmpLex == "print":
+                        return Token("print", "print")
+                    elif tmpLex == "end":
+                        return Token("end", "end")
                 else:
-                    self.i = iter - 1
+                    self.c = nxt_char
                     break
             return Token(tmpLex, "id")
         else:
             return Token("error", "error")
 
-    def is_end(self, lexeme):
-        iter = self.i
-        if self.stdin[iter + 1] == "n" and self.stdin[iter + 2] == "d":
-            self.i += 2
-            return True
-        else:
-            return False
+    def next_char(self):
+        return stdin.read(1)
 
-    def is_print(self, lexeme):
-        iter = self.i
-        if self.stdin[iter + 1] == "r" and self.stdin[iter + 2] == "i" and self.stdin[iter + 3] == "n" and self.stdin[iter + 4] == "t" :
-            self.i += 4
-            return True
-        else:
-            return False
+
+#lex = Lexer()
+
+#print(lex.nextToken().tCode)
+#print(lex.nextToken().tCode)
+#print(lex.nextToken().tCode)
+
+
+
+
+
+#for i in range(10):
+
+#    print(next_char())
 
 
 #print("running")

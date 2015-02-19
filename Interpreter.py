@@ -77,16 +77,9 @@ class Interpreter(object):
             sys.exit(1)
 
 
-    def execute(self):
-        pass
-
-
 myInterpreter = Interpreter()
 
 while True:
     myInterpreter.fetch()
-    if(myInterpreter.input_line[0] == "0"):
-        break
     myInterpreter.decode()
-    myInterpreter.execute()
 
