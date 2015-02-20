@@ -7,5 +7,5 @@
 
 #!/bin/bash
 clear
-python Compiler.py < $1 | python Interpreter.py
+python3 Compiler.py < $1 | python3 Interpreter.py
 
